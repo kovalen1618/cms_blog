@@ -1,3 +1,9 @@
+// React
+// import React, { useEffect, useState } from 'react';
+
+// Components
+import { Layout } from '@/components';
+
 // Global styles
 import '../styles/globals.scss';
 
@@ -8,8 +14,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <Layout>
+      {children}
+    </Layout>
   )
 }
