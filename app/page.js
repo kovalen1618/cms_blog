@@ -1,18 +1,15 @@
 // Components
 import { PostCard, Categories, PostWidget } from '../components';
 
-// Demo list of posts
-const posts = [
-  { title: 'React Testing', excerpt: 'Learn React Testing' },
-  { title: 'React with Tailwind', excerpt: 'Learn React with Tailwind' },
-];
+// Services
+import { getPosts } from '../services';
 
-export default function Home() {
+export default function Home({ posts }) {
   return (
     <div className="container mx-auto px-10 mb-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 col-span-1">
-          {posts.map((post) => (
+          {posts && posts.map((post) => (
             <PostCard key={post.title} post={post} />
           ))}
         </div>
@@ -23,7 +20,15 @@ export default function Home() {
             <Categories />
         </div>
       </div>
-
     </div>
   )
+}
+
+// Fetch data at build time
+export async function getStaticProps() {
+  const posts = (await getPosts()) || [];
+  
+  return {
+    props: { posts },
+  };
 }
